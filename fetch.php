@@ -105,51 +105,53 @@ if ($total_links > 4) {
         $page_array[] = $count;
     }
 }
-for ($count = 0; $count < count($page_array); $count++) {
-    
-    if ($page == $page_array[$count]) {
-        $page_link .= '
-        <li class="page_item active">
-            <a class="page-link" href="#" >'.$page_array[$count].'
-                <span class="sr-only">(currant)</span>
-            </a>
-        </li>
-        '; 
-
-        $prev_id = $page_array[$count] - 1;
-
-        if ($prev_id > 0) {
-            $prev_link = '<li class="page_item">
-            <a class="page-link" href="javascript:void(0)" data-page="'.$prev_id.'">Prev</a>
-            </li>';
-        } else {
-            $prev_link = '<li class="page_item disabled">
-            <a class="page-link" href="#" style="pointer-events: none">Prev</a>
-            </li>';
-        }
+if (isset($page_array)) {
+    for ($count = 0; $count < count($page_array); $count++) {
         
-        $next_id = $page_array[$count] + 1;
-        
-        if ($next_id > $total_links) {
-            $next_link = '<li class="page_item disabled">
-            <a class="page-link" href="#" style="pointer-events: none">Next</a>
+        if ($page == $page_array[$count]) {
+            $page_link .= '
+            <li class="page_item active">
+                <a class="page-link" href="#" >'.$page_array[$count].'
+                    <span class="sr-only">(currant)</span>
+                </a>
             </li>
-            ';
-        } else {
-            $next_link = '<li class="page_item">
-                <a class="page-link" href="javascript:void(0)" data-page="'.$next_id.'">Next</a>
-            </li>';
-        }
+            '; 
 
-    } else {
-        if ($page_array[$count] == '...') {
-            $page_link .= '<li class="page_item disabled">
-            <a class="page-link" href="#" style="pointer-events: none">...</a>
-            </li>';
+            $prev_id = $page_array[$count] - 1;
+
+            if ($prev_id > 0) {
+                $prev_link = '<li class="page_item">
+                <a class="page-link" href="javascript:void(0)" data-page="'.$prev_id.'">Prev</a>
+                </li>';
+            } else {
+                $prev_link = '<li class="page_item disabled">
+                <a class="page-link" href="#" style="pointer-events: none">Prev</a>
+                </li>';
+            }
+            
+            $next_id = $page_array[$count] + 1;
+            
+            if ($next_id > $total_links) {
+                $next_link = '<li class="page_item disabled">
+                <a class="page-link" href="#" style="pointer-events: none">Next</a>
+                </li>
+                ';
+            } else {
+                $next_link = '<li class="page_item">
+                    <a class="page-link" href="javascript:void(0)" data-page="'.$next_id.'">Next</a>
+                </li>';
+            }
+
         } else {
-            $page_link .= '<li class="page_item">
-            <a class="page-link" href="javascript:void(0)" data-page="'.$page_array[$count].'">'.$page_array[$count].'</a>
-            </li>';
+            if ($page_array[$count] == '...') {
+                $page_link .= '<li class="page_item disabled">
+                <a class="page-link" href="#" style="pointer-events: none">...</a>
+                </li>';
+            } else {
+                $page_link .= '<li class="page_item">
+                <a class="page-link" href="javascript:void(0)" data-page="'.$page_array[$count].'">'.$page_array[$count].'</a>
+                </li>';
+            }
         }
     }
 }
